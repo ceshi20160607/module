@@ -19,19 +19,12 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<Result<User>> doLogin(param) async {
-    // Map<String,dynamic> map = {"username": "admin","password": "123123aa","deviceType": "0","loginType": "0"};
-    //
-    // Future<Response> ret = _dio.post("localhost:9099/user/doLogin",data: map);
-    // final dio1 = Dio();
-    // Future<Response>  response =  dio1.post("localhost:9099/user/doLogin", data: {'id': 12, 'name': 'dio'},options: Options(contentType: 'application/json;charset=UTF-8;'));
-    print(_dio.options);
+  Future<Result<User>> doLogin(Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(param);
-    // queryParameters.addAll(param);
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<User>>(Options(
       method: 'POST',
@@ -44,7 +37,11 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<User>.fromJson(
       _result.data!,
       (json) => User.fromJson(json as Map<String, dynamic>),
@@ -54,11 +51,11 @@ class _RestClient implements RestClient {
 
   @override
   Future<Result<Modulefieldpage>> queryPageListExamine(
-    moduleId,
-    pageNumber,
-    pageSize,
-    pageType,
-    keyword,
+    int moduleId,
+    int pageNumber,
+    int pageSize,
+    int pageType,
+    String keyword,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -69,7 +66,7 @@ class _RestClient implements RestClient {
       r'keyword': keyword,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Result<Modulefieldpage>>(Options(
       method: 'POST',
@@ -82,7 +79,11 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<Modulefieldpage>.fromJson(
       _result.data!,
       (json) => Modulefieldpage.fromJson(json as Map<String, dynamic>),
@@ -92,12 +93,12 @@ class _RestClient implements RestClient {
 
   @override
   Future<Result<Modulepage>> getModuleList(
-    rootId,
-    typeFlag,
-    pageNumber,
-    pageSize,
-    pageType,
-    keyword,
+    int? rootId,
+    int? typeFlag,
+    int pageNumber,
+    int pageSize,
+    int pageType,
+    String keyword,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -110,7 +111,7 @@ class _RestClient implements RestClient {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<Modulepage>>(Options(
       method: 'POST',
@@ -123,7 +124,11 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<Modulepage>.fromJson(
       _result.data!,
       (json) => Modulepage.fromJson(json as Map<String, dynamic>),
@@ -133,8 +138,8 @@ class _RestClient implements RestClient {
 
   @override
   Future<Result<List<Modulefield>>> getModuleFieldAdd(
-    type,
-    moduleId,
+    int type,
+    int moduleId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -142,7 +147,7 @@ class _RestClient implements RestClient {
       r'moduleId': moduleId,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Result<List<Modulefield>>>(Options(
       method: 'POST',
@@ -155,21 +160,27 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<List<Modulefield>>.fromJson(
       _result.data!,
-      (json) => (json as List<dynamic>)
-          .map<Modulefield>(
-              (i) => Modulefield.fromJson(i as Map<String, dynamic>))
-          .toList(),
+      (json) => json is List<dynamic>
+          ? json
+              .map<Modulefield>(
+                  (i) => Modulefield.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }
 
   @override
   Future<Result<String>> saveModuleRecord(
-    moduleId,
-    entity,
+    int moduleId,
+    Map<String, dynamic> entity,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -177,7 +188,7 @@ class _RestClient implements RestClient {
       r'entity': entity,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<String>>(Options(
       method: 'POST',
@@ -190,7 +201,11 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<String>.fromJson(
       _result.data!,
       (json) => json as String,
@@ -200,8 +215,8 @@ class _RestClient implements RestClient {
 
   @override
   Future<Result<String>> updateModuleRecord(
-    moduleId,
-    entity,
+    int moduleId,
+    Map<String, dynamic> entity,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -209,7 +224,7 @@ class _RestClient implements RestClient {
       r'entity': entity,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<String>>(Options(
       method: 'POST',
@@ -222,7 +237,11 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<String>.fromJson(
       _result.data!,
       (json) => json as String,
@@ -231,11 +250,11 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<Map<String, dynamic>>> queryById(id) async {
+  Future<Result<Map<String, dynamic>>> queryById(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Result<Map<String, dynamic>>>(Options(
       method: 'POST',
@@ -248,7 +267,11 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<Map<String, dynamic>>.fromMapJson(
       _result.data!,
     );
@@ -256,11 +279,11 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<List<Modulefield>>> information(id) async {
+  Future<Result<List<Modulefield>>> information(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Result<List<Modulefield>>>(Options(
       method: 'POST',
@@ -273,24 +296,30 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Result<List<Modulefield>>.fromJson(
       _result.data!,
-      (json) => (json as List<dynamic>)
-          .map<Modulefield>(
-              (i) => Modulefield.fromJson(i as Map<String, dynamic>))
-          .toList(),
+      (json) => json is List<dynamic>
+          ? json
+              .map<Modulefield>(
+                  (i) => Modulefield.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }
 
   @override
-  Future<Result<List<Map<String,dynamic>>>> queryModuleRecordPageList(
-    moduleId,
-    pageNumber,
-    pageSize,
-    pageType,
-    keyword,
+  Future<Result<List<Map<String, dynamic>>>> queryModuleRecordPageList(
+    int moduleId,
+    int pageNumber,
+    int pageSize,
+    int pageType,
+    String keyword,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -301,9 +330,9 @@ class _RestClient implements RestClient {
       r'keyword': keyword,
     };
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Result<List<Map<String,dynamic>>>>(Options(
+        _setStreamType<Result<List<Map<String, dynamic>>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -314,8 +343,12 @@ class _RestClient implements RestClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Result<List<Map<String,dynamic>>>.fromMapJson(
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Result<List<Map<String, dynamic>>>.fromMapJson(
       _result.data!,
     );
     return value;
@@ -332,5 +365,22 @@ class _RestClient implements RestClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

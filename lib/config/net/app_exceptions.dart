@@ -23,16 +23,16 @@ class AppException implements Exception {
     return "$code$message";
   }
 
-  factory AppException.create(DioError error) {
+  factory AppException.create(DioException error) {
     switch (error.type) {
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         return BadRequestException(NetConst.NET_CODE_ERROR, "请求取消");
-      case DioErrorType.connectTimeout: //连接超时
-      case DioErrorType.sendTimeout: //请求超时
+      case DioExceptionType.connectionTimeout: //连接超时
+      case DioExceptionType.sendTimeout: //请求超时
         return BadRequestException(NetConst.NET_CODE_ERROR, CLIENT_NET_ERROR);
-      case DioErrorType.receiveTimeout: //响应超时
+      case DioExceptionType.receiveTimeout: //响应超时
         return BadRequestException(NetConst.NET_CODE_ERROR, SERVER_NET_ERROR);
-      case DioErrorType.response:
+      case DioExceptionType.badResponse:
         try {
           int errCode = error.response!.statusCode!;
           // String errMsg = error.response.statusMessage;
@@ -60,7 +60,7 @@ class AppException implements Exception {
           print('不通1');
           return AppException(NetConst.NET_CODE_ERROR, NET_CONNECT_ERROR);
         }
-      case DioErrorType.other:
+      case DioExceptionType.unknown:
         if (error.error is SocketException) {
           return AppException(NetConst.NET_CODE_ERROR, CLIENT_NET_ERROR);
         } else {

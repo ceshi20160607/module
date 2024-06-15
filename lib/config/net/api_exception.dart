@@ -25,6 +25,20 @@ class ApiException extends CustomDioError {
     }
     return str;
   }
+
+  @override
+  DioException copyWith({RequestOptions? requestOptions, Response? response, DioExceptionType? type, Object? error, StackTrace? stackTrace, String? message}) {
+    // TODO: implement copyWith
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement stackTrace
+  StackTrace get stackTrace => throw UnimplementedError();
+
+  @override
+  // TODO: implement type
+  DioExceptionType get type => throw UnimplementedError();
 }
 
 abstract class CustomDioError implements DioError {
@@ -49,9 +63,4 @@ abstract class CustomDioError implements DioError {
   @override
   Response? response;
 
-  @override
-  DioErrorType type = DioErrorType.other;
-
-  @override
-  StackTrace? stackTrace;
 }

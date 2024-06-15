@@ -34,9 +34,9 @@ dependencies:
   #get
   get: ^4.6.6
   #http
-  dio: ^4.0.6
-  retrofit: '>=3.0.0 <4.0.0'
-  json_annotation: ^4.9.0
+  dio: ^5.4.3+1
+  retrofit: '>=4.0.0 <5.0.0'
+  json_annotation: ^4.8.1
   #日志
   logger: ^1.4.0
   # 屏幕适配
@@ -57,7 +57,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -68,12 +68,12 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.2
 
 
   #使用成成api：dart pub run build_runner build
-  retrofit_generator: '>=4.0.0 <5.0.0'
-  build_runner: ^2.4.11
+  retrofit_generator: '>=7.0.0 <8.0.0'
+  build_runner: '>=2.3.0 <4.0.0'
   #  json_serializable: '>4.4.0'
   #   ///命令行执行flutter pub run json5_model --src=jsons
   #  json_serializable: ^6.7.1

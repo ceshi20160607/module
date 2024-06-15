@@ -22,10 +22,10 @@ class Http {
 
   Http._internal() {
     BaseOptions options = BaseOptions(
-      connectTimeout: NetConst.CONNECT_TIMEOUT,
+      connectTimeout: Duration(seconds: NetConst.CONNECT_TIMEOUT),
 
       /// 响应流上前后两次接受到数据的间隔，单位为毫秒。
-      receiveTimeout: NetConst.RECEIVE_TIMEOUT,
+      receiveTimeout: Duration(seconds: NetConst.RECEIVE_TIMEOUT),
       baseUrl: Env.getEnvConfig(),
       contentType: Headers.jsonContentType,
       responseType: ResponseType.bytes,

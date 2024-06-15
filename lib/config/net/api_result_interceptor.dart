@@ -20,7 +20,7 @@ class ApiResultInterceptor extends Interceptor {
     /// http error错误处理
     if (resp.statusCode != NetConst.NET_CODE_SUCESS) {
       handler.reject(
-          DioError(requestOptions: resp.requestOptions, response: resp), true);
+          DioException(requestOptions: resp.requestOptions, response: resp), true);
       return;
     }
     final result =
