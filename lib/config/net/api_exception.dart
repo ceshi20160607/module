@@ -41,7 +41,7 @@ class ApiException extends CustomDioError {
   DioExceptionType get type => throw UnimplementedError();
 }
 
-abstract class CustomDioError implements DioError {
+abstract class CustomDioError implements DioException {
   static final defaultErrorRequestOptions = RequestOptions(path: '');
 
   @override
@@ -63,4 +63,9 @@ abstract class CustomDioError implements DioError {
   @override
   Response? response;
 
+  @override
+  DioExceptionType type = DioExceptionType.unknown;
+
+  @override
+  late StackTrace stackTrace;
 }

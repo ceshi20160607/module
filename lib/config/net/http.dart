@@ -1,13 +1,17 @@
 import 'package:dio/dio.dart';
 
 import '../api/beanapi/rest_client.dart';
-import '../const/net_const.dart';
 import '../env/env.dart';
 import 'api_result_interceptor.dart';
 import 'error_interceptor.dart';
 import 'middle_interceptor.dart';
 
 class Http {
+  ///超时时间
+  static const Duration connectTimeout = Duration(milliseconds: 20 * 1000);
+
+  static const Duration receiveTimeout = Duration(milliseconds: 20 * 1000);
+
   /// 实例化
   static final Http _instance = Http._internal();
 
@@ -22,11 +26,10 @@ class Http {
 
   Http._internal() {
     BaseOptions options = BaseOptions(
-      connectTimeout: Duration(seconds: NetConst.CONNECT_TIMEOUT),
-
+      connectTimeout: connectTimeout,
       /// 响应流上前后两次接受到数据的间隔，单位为毫秒。
-      receiveTimeout: Duration(seconds: NetConst.RECEIVE_TIMEOUT),
-      baseUrl: Env.getEnvConfig(),
+      receiveTimeout: receiveTimeout,
+      baseUrl: Env.getEnvConfig(env: Env.currEnv).baseUrl,
       contentType: Headers.jsonContentType,
       responseType: ResponseType.bytes,
       receiveDataWhenStatusError: false,
@@ -40,10 +43,11 @@ class Http {
     //   };
     //   return null;
     // };
+    dio.interceptors.add(LogInterceptor(responseBody: true,requestBody: true));
     // 添加error拦截器
-    dio.interceptors.add(MiddleInterceptor());
-    dio.interceptors.add(ErrorInterceptor());
+    // dio.interceptors.add(MiddleInterceptor());
+    // dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(ApiResultInterceptor());
-    client = RestClient(dio, baseUrl: Env.getEnvConfig());
+    client = RestClient(dio, baseUrl: Env.getEnvConfig(env: Env.currEnv).baseUrl);
   }
 }

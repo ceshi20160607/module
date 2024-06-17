@@ -27,10 +27,12 @@ class ApiResultInterceptor extends Interceptor {
         Result<dynamic>.fromMapJson(resp.data as Map<String, dynamic>);
 
     if (result.code == SysConst.SYS_CODE_SUCCESS) {
+      print("成功");
       /// 成功
       handler.next(resp);
       return;
     } else {
+      print("失败");
       /// 失败
       handler.reject(
           result.toException()..requestOptions = resp.requestOptions, true);

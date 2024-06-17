@@ -14,10 +14,7 @@ class AppException implements Exception {
   late final String message;
   late final int code;
 
-  AppException(int code, String message) {
-    this.code = code;
-    this.message = message;
-  }
+  AppException(int code, String message) {}
 
   String toString() {
     return "$code$message";

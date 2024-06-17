@@ -10,6 +10,7 @@ class MiddleInterceptor extends Interceptor {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    // options.headers["Access-Control-Allow-Origin"] = "*";
     // 将数据内容json 转为字符串
     // String content = json.encode(options);
     // 获取url 路径
@@ -17,6 +18,7 @@ class MiddleInterceptor extends Interceptor {
     // logD("requestcontent---->:$content");
     logD("requestPath---->:$urlPath");
     logD("requestParam--->:${options.queryParameters}");
+    logD("data--->:${options.data}");
     //---------------------------token-----------------------------
     bool isLogin = SharedPreferencesUtil.getBool(KS.isLogin) ?? false;
     if (isLogin) {

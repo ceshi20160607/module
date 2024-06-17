@@ -164,18 +164,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget buildTitle() {
-    Dio dio = new Dio();
-    var data = {
-      "username": "admin",
-      "password": "123123aa",
-      "loginType": 0,
-      "deviceType": 0
-    };
-    final response = dio.get('https://pub.flutter-io.cn');
-    print(response);
-    var resss = dio.post("http://localhost:9099/user/doLogin", data: data,options: Options(method: 'post'));
-    print("11111111");
-    print(resss);
+
     return const Padding(
         padding: EdgeInsets.all(8),
         child: Text(
