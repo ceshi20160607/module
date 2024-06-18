@@ -50,7 +50,10 @@ class ModulefieldLogic extends BaseCommonController {
     for(var f in fieldList){
       entity[f.fieldName] = f.value;
     }
-    Http().client.saveModuleRecord(moduleId,entity).then((value) {
+    Map<String,dynamic> info = {};
+    info["moduleId"] = moduleId;
+    info["entity"] = entity;
+    Http().client.saveModuleRecord(info).then((value) {
       Loading.dissmiss();
       netState = NetState.dataSussessState;
       inputFlag = true;

@@ -29,8 +29,8 @@ class NavbarPage extends GetView<NavbarLogic> {
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
       items: [
-        CommonUtil.buildBottomNavigationBarItem(KS.module, "module"),
-        CommonUtil.buildBottomNavigationBarItem(KS.examine, "examine"),
+        CommonUtil.buildBottomNavigationBarItem(KSConst.module, "module"),
+        CommonUtil.buildBottomNavigationBarItem(KSConst.examine, "examine"),
       ],
       currentIndex: controller.tabIndex.value,
       onTap: (int index) async {

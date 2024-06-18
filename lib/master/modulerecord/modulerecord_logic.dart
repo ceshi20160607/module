@@ -33,12 +33,7 @@ class ModulerecordLogic extends BaseListController {
 
     Http()
         .client
-        .queryModuleRecordPageList(
-        info['typeFlag'],
-        info['pageNumber'],
-        info['pageSize'],
-        info['pageType'],
-        info['keyword'])
+        .queryModuleRecordPageList(info)
         .then((value) {
       netState = NetState.dataSussessState;
 

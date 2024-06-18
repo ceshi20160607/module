@@ -7,6 +7,8 @@ import '../../config/widget/base/BaseAddWidget.dart';
 import 'modulefield_logic.dart';
 
 class ModulefieldPage extends BaseCommonView<ModulefieldLogic> {
+  ModulefieldPage({Key? key}) : super(key: key);
+  final controller = Get.find<ModulefieldLogic>();
 
   /// 设置导航栏文字
   @override

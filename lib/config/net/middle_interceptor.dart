@@ -20,14 +20,16 @@ class MiddleInterceptor extends Interceptor {
     logD("requestParam--->:${options.queryParameters}");
     logD("data--->:${options.data}");
     //---------------------------token-----------------------------
-    bool isLogin = SharedPreferencesUtil.getBool(KS.isLogin) ?? false;
+    bool isLogin = SharedPreferencesUtil.getBool(KSConst.isLogin) ?? false;
     if (isLogin) {
-      String satoken = SharedPreferencesUtil.getString(KS.saToken) ?? "";
+      String satoken = SharedPreferencesUtil.getString(KSConst.saToken) ?? "";
       if (satoken != "") {
         options.headers["satoken"] = satoken;
       }
       logD("satoken---->:$satoken");
     }
+    // String content = json.encode(options);
+    // logD("satoken---->:$content");
     //---------------------------token-----------------------------
     return handler.next(options);
   }

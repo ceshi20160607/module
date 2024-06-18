@@ -6,6 +6,9 @@ import 'modulerecord_logic.dart';
 
 class ModulerecordPage extends BaseListView<ModulerecordLogic> {
 
+  ModulerecordPage({Key? key}) : super(key: key);
+  final controller = Get.find<ModulerecordLogic>();
+
   /// 设置导航栏文字
   @override
   String? get navTitle => controller.title;

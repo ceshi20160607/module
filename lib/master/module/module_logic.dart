@@ -30,12 +30,7 @@ class ModuleLogic extends BaseListController {
 
     Http()
         .client
-        .getModuleList(info['rootId'],
-        info['typeFlag'],
-        info['pageNumber'],
-        info['pageSize'],
-        info['pageType'],
-        info['keyword'])
+        .getModuleList(info)
         .then((value) {
       netState = NetState.dataSussessState;
 
@@ -109,6 +104,7 @@ class ModuleLogic extends BaseListController {
     // Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
     // await Get.forceAppUpdate();
     logD("msg---->$moduleId");
+    logD("msg---->$moduleName");
     if (moduleId != null && moduleId.length > 0) {
       Get.toNamed(ModuleTypeEnum.MODULERECORD.routepath, arguments: {'moduleId': moduleId,'moduleName': moduleName});
     } else {

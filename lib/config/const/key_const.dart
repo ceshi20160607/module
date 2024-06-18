@@ -1,5 +1,5 @@
 ///关键字
-class KS {
+class KSConst {
   ///------------------------system------------------------
   ///satoken（登录成功后获得satoken）
   static const String saToken = "satoken";

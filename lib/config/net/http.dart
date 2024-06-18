@@ -45,8 +45,8 @@ class Http {
     // };
     dio.interceptors.add(LogInterceptor(responseBody: true,requestBody: true));
     // 添加error拦截器
-    // dio.interceptors.add(MiddleInterceptor());
-    // dio.interceptors.add(ErrorInterceptor());
+    dio.interceptors.add(MiddleInterceptor());
+    dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(ApiResultInterceptor());
     client = RestClient(dio, baseUrl: Env.getEnvConfig(env: Env.currEnv).baseUrl);
   }

@@ -51,22 +51,12 @@ class _RestClient implements RestClient {
 
   @override
   Future<Result<Modulefieldpage>> queryPageListExamine(
-    int moduleId,
-    int pageNumber,
-    int pageSize,
-    int pageType,
-    String keyword,
-  ) async {
+      Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'moduleId': moduleId,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize,
-      r'pageType': pageType,
-      r'keyword': keyword,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Result<Modulefieldpage>>(Options(
       method: 'POST',
@@ -92,26 +82,12 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<Modulepage>> getModuleList(
-    int? rootId,
-    int? typeFlag,
-    int pageNumber,
-    int pageSize,
-    int pageType,
-    String keyword,
-  ) async {
+  Future<Result<Modulepage>> getModuleList(Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'rootId': rootId,
-      r'typeFlag': typeFlag,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize,
-      r'pageType': pageType,
-      r'keyword': keyword,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<Modulepage>>(Options(
       method: 'POST',
@@ -178,17 +154,12 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<String>> saveModuleRecord(
-    int moduleId,
-    Map<String, dynamic> entity,
-  ) async {
+  Future<Result<String>> saveModuleRecord(Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'moduleId': moduleId,
-      r'entity': entity,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<String>>(Options(
       method: 'POST',
@@ -214,17 +185,12 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<String>> updateModuleRecord(
-    int moduleId,
-    Map<String, dynamic> entity,
-  ) async {
+  Future<Result<String>> updateModuleRecord(Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'moduleId': moduleId,
-      r'entity': entity,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Result<String>>(Options(
       method: 'POST',
@@ -315,22 +281,12 @@ class _RestClient implements RestClient {
 
   @override
   Future<Result<List<Map<String, dynamic>>>> queryModuleRecordPageList(
-    int moduleId,
-    int pageNumber,
-    int pageSize,
-    int pageType,
-    String keyword,
-  ) async {
+      Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'moduleId': moduleId,
-      r'pageNumber': pageNumber,
-      r'pageSize': pageSize,
-      r'pageType': pageType,
-      r'keyword': keyword,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Result<List<Map<String, dynamic>>>>(Options(
       method: 'POST',
