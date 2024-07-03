@@ -17,8 +17,8 @@ class LoginLogic extends GetxController {
 
   @override
   void onInit() {
-    state.username = "";
-    state.password = "";
+    state.username = "admin";
+    state.password = "123123aa";
     state.loginType = 0;
     state.deviceType = 0;
     state.isObscure = false;

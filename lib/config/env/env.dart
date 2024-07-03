@@ -6,8 +6,8 @@ import 'urls.dart';
 
 class Env {
   /// 当前环境
-  static String currEnv = getCurrentEnvironment(str: EnvConfig.dev);
-  // static String currEnv = getCurrentEnvironment(str: EnvConfig.prod);
+  // static String currEnv = getCurrentEnvironment(str: EnvConfig.dev);
+  static String currEnv = getCurrentEnvironment(str: EnvConfig.prod);
 
   /// 获取当前环境
   /// 如果是release 直接返回 prod

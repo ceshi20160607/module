@@ -50,7 +50,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<Modulefieldpage>> queryPageListExamine(
+  Future<Result<Modulefieldpage>> examineQueryPageList(
       Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -82,7 +82,8 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<Modulepage>> getModuleList(Map<String, dynamic> param) async {
+  Future<Result<Modulepage>> moduleQueryPageLis(
+      Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -113,7 +114,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<List<Modulefield>>> getModuleFieldAdd(
+  Future<Result<List<Modulefield>>> moduleFieldQueryFieldAdd(
     int type,
     int moduleId,
   ) async {
@@ -154,7 +155,116 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<String>> saveModuleRecord(Map<String, dynamic> param) async {
+  Future<Result<List<Modulefield>>> moduleFieldUserQueryFieldHead(
+      int moduleId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'moduleId': moduleId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Result<List<Modulefield>>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'moduleFieldUser/queryFieldHead',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Result<List<Modulefield>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<Modulefield>(
+                  (i) => Modulefield.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<Result<List<Modulefield>>> moduleFieldUserQueryFieldSearch(
+      int moduleId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'moduleId': moduleId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Result<List<Modulefield>>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'moduleFieldUser/queryFieldSearch',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Result<List<Modulefield>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<Modulefield>(
+                  (i) => Modulefield.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<Result<List<Modulefield>>> moduleFieldUserChangeFieldSort(
+      Map<String, dynamic> param) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Result<List<Modulefield>>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'moduleFieldUser/changeFieldSort',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Result<List<Modulefield>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<Modulefield>(
+                  (i) => Modulefield.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<Result<String>> moduleRecordAdd(Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -185,7 +295,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<String>> updateModuleRecord(Map<String, dynamic> param) async {
+  Future<Result<String>> moduleRecordUpdate(Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -216,7 +326,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<Map<String, dynamic>>> queryById(int id) async {
+  Future<Result<Map<String, dynamic>>> moduleRecordQueryById(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{};
@@ -245,7 +355,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<List<Modulefield>>> information(int id) async {
+  Future<Result<List<Modulefield>>> moduleRecordInformation(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{};
@@ -280,7 +390,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<List<Map<String, dynamic>>>> queryModuleRecordPageList(
+  Future<Result<Modulerecordpage>> moduleRecordQueryPageList(
       Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -288,7 +398,7 @@ class _RestClient implements RestClient {
     final _data = <String, dynamic>{};
     _data.addAll(param);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Result<List<Map<String, dynamic>>>>(Options(
+        _setStreamType<Result<Modulerecordpage>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -304,8 +414,9 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Result<List<Map<String, dynamic>>>.fromMapJson(
+    final value = Result<Modulerecordpage>.fromJson(
       _result.data!,
+      (json) => Modulerecordpage.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

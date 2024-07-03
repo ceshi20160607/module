@@ -1,6 +1,9 @@
-export './field/modulefield.dart' ;
-export './field/modulefieldpage.dart' ;
-export './loginuser/loginuser.dart' ;
-export './loginuser/user.dart' ;
-export './module/module.dart' ;
-export './module/modulepage.dart' ;
+export 'field/modulefield.dart' ; 
+export 'field/modulefieldpage.dart' ; 
+export 'loginuser/loginuser.dart' ; 
+export 'loginuser/user.dart' ; 
+export 'module/module.dart' ; 
+export 'module/modulepage.dart' ; 
+export 'module/modulesearch.dart' ; 
+export 'modulerecord/modulerecordpage.dart' ; 
+export 'modulerecord/modulerecordsearch.dart' ; 

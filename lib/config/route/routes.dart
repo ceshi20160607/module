@@ -10,6 +10,8 @@ import '../../master/module/module_binding.dart';
 import '../../master/module/module_view.dart';
 import '../../master/modulefield/modulefield_binding.dart';
 import '../../master/modulefield/modulefield_view.dart';
+import '../../master/modulerecord/modulerecord_binding.dart';
+import '../../master/modulerecord/modulerecord_view.dart';
 import '../enum/module_type.dart';
 
 class AppRoutes {
@@ -32,6 +34,10 @@ class AppRoutes {
         name: ModuleTypeEnum.MODULEFIELD.routepath,
         page: () => ModulefieldPage(),
         binding: ModulefieldBinding()),
+    GetPage(
+        name: ModuleTypeEnum.MODULERECORD.routepath,
+        page: () => ModulerecordPage(),
+        binding: ModulerecordBinding()),
     GetPage(
         name: ModuleTypeEnum.EXAMINE.routepath,
         page: () => ExaminePage(),

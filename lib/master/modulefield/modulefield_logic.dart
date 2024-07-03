@@ -22,7 +22,9 @@ class ModulefieldLogic extends BaseCommonController {
     inputFlag = id.isEmpty?true:false;
     title = id.isEmpty?'新建':'编辑';
 
-    Http().client.getModuleFieldAdd(1,moduleId).then((value) {
+    logD("id--->$id");
+    logD("title--->$title");
+    Http().client.moduleFieldQueryFieldAdd(1,moduleId).then((value) {
       Loading.dissmiss();
       netState = NetState.dataSussessState;
       fieldList = value.data!;
@@ -53,7 +55,7 @@ class ModulefieldLogic extends BaseCommonController {
     Map<String,dynamic> info = {};
     info["moduleId"] = moduleId;
     info["entity"] = entity;
-    Http().client.saveModuleRecord(info).then((value) {
+    Http().client.moduleRecordAdd(info).then((value) {
       Loading.dissmiss();
       netState = NetState.dataSussessState;
       inputFlag = true;

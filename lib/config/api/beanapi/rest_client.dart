@@ -17,25 +17,33 @@ abstract class RestClient {
 
   // ///------------------------------examine------------------------
   @POST("examine/queryPageList")
-  Future<Result<Modulefieldpage>> queryPageListExamine(@Body() Map<String, dynamic> param);
+  Future<Result<Modulefieldpage>> examineQueryPageList(@Body() Map<String, dynamic> param);
   // ///------------------------------module------------------------
   @POST("module/queryPageList")
-  Future<Result<Modulepage>> getModuleList(@Body() Map<String, dynamic> param);
+  Future<Result<Modulepage>> moduleQueryPageLis(@Body() Map<String, dynamic> param);
 
   // ///------------------------------module-field------------------------
   @POST("moduleField/queryFieldAdd")
-  Future<Result<List<Modulefield>>> getModuleFieldAdd(@Query('type') int type,@Query('moduleId') int moduleId);
+  Future<Result<List<Modulefield>>> moduleFieldQueryFieldAdd(@Query('type') int type,@Query('moduleId') int moduleId);
+  // ///------------------------------module-field-user------------------------
+  @POST("moduleFieldUser/queryFieldHead")
+  Future<Result<List<Modulefield>>> moduleFieldUserQueryFieldHead(@Query('moduleId') int moduleId);
+  @POST("moduleFieldUser/queryFieldSearch")
+  Future<Result<List<Modulefield>>> moduleFieldUserQueryFieldSearch(@Query('moduleId') int moduleId);
+  @POST("moduleFieldUser/changeFieldSort")
+  Future<Result<List<Modulefield>>> moduleFieldUserChangeFieldSort(@Body() Map<String, dynamic> param);
+
   // ///------------------------------module-record------------------------
   @POST("moduleRecord/add")
-  Future<Result<String>> saveModuleRecord(@Body() Map<String, dynamic> param);
+  Future<Result<String>> moduleRecordAdd(@Body() Map<String, dynamic> param);
   @POST("moduleRecord/update")
-  Future<Result<String>> updateModuleRecord(@Body() Map<String, dynamic> param);
+  Future<Result<String>> moduleRecordUpdate(@Body() Map<String, dynamic> param);
   @POST("moduleRecord/queryById")
-  Future<Result<Map<String,dynamic>>> queryById( @Query('id') int id);
+  Future<Result<Map<String,dynamic>>> moduleRecordQueryById( @Query('id') int id);
   @POST("moduleRecord/information")
-  Future<Result<List<Modulefield>>> information(@Query('id') int id);
+  Future<Result<List<Modulefield>>> moduleRecordInformation(@Query('id') int id);
   @POST("moduleRecord/queryPageList")
-  Future<Result<List<Map<String,dynamic>>>> queryModuleRecordPageList(@Body() Map<String, dynamic> param);
+  Future<Result<Modulerecordpage>> moduleRecordQueryPageList(@Body() Map<String, dynamic> param);
   //
   // ///------------------------------car------------------------
 

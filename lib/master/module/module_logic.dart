@@ -30,7 +30,7 @@ class ModuleLogic extends BaseListController {
 
     Http()
         .client
-        .getModuleList(info)
+        .moduleQueryPageLis(info)
         .then((value) {
       netState = NetState.dataSussessState;
 
