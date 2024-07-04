@@ -64,39 +64,7 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
     });
   }
 
-  // Widget tableWidget() {
-  //   List<DataColumn> columns = [];
-  //   List<DataRow> rows = [];
-  //   controller.fieldHeads.forEach((head) {
-  //     columns.add(_myDataColumn(head.fieldName));
-  //   });
-  //   controller.recordList.forEach((r) {
-  //     List<DataCell> items = [];
-  //     controller.fieldHeads.forEach((head) {
-  //       String id = r['id'];
-  //       String name = r['name'];
-  //       if (head.fieldName == 'name') {
-  //         items.add(DataCell(
-  //           Text(r[head.fieldName].toString()),
-  //           onTap: () {
-  //             controller.jumpRecord(id, name);
-  //           },
-  //         ));
-  //       } else {
-  //         items.add(DataCell(Text(r[head.fieldName].toString())));
-  //       }
-  //     });
-  //     rows.add(DataRow(cells: items));
-  //   });
-  //   return DataTable(columns: columns, rows: rows,
-  //     dataRowHeight: 40,
-  //     headingRowHeight: 55,
-  //     horizontalMargin: 20,
-  //     columnSpacing: 50,
-  //     dividerThickness: 2,
-  //   );
-  // }
-
+  //展示表格出现表格表头空的问题
   _myDataTable(){
     return DataTable(
       columns: _myDataColumnList(),
