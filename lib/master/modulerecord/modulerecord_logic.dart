@@ -14,6 +14,7 @@ class ModulerecordLogic extends BaseListController {
   List<Modulefield> fieldHeads = [];
   List<Map<String,dynamic>> recordList = [];
   String title='';
+  Map<String, dynamic> requestParams = {};
 
   @override
   void initData() {
@@ -33,6 +34,13 @@ class ModulerecordLogic extends BaseListController {
   @override
   void getnetworkdata(Map<String, dynamic> info) {
     super.getnetworkdata(info);
+
+
+
+
+
+
+
 
     print("head50");
     Http()
@@ -104,6 +112,9 @@ class ModulerecordLogic extends BaseListController {
   @override
   Map<String, dynamic> configNetWorkParmas() {
     title = Get.arguments['moduleName']??"";
+    requestParams['moduleId']= Get.arguments['moduleId'];
+    requestParams['moduleName']= Get.arguments['moduleName'];
+
     return {
       'moduleId': Get.arguments['moduleId'],
       'typeFlag': 1,
@@ -119,12 +130,9 @@ class ModulerecordLogic extends BaseListController {
   Future<void> jumpRecord(String? id,String? name) async {
     // Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
     // await Get.forceAppUpdate();
+    String moduleId = Get.arguments['moduleId']??"";
     logD("msg---->$id");
-    if (id != null && id.length > 0) {
-      Get.toNamed(ModuleTypeEnum.MODULEFIELD.routepath, arguments: {'id': id,'name': name});
-    } else {
-      Loading.showToast("参数异常！");
-    }
+    Get.toNamed(ModuleTypeEnum.MODULEFIELD.routepath, arguments: {'moduleId': moduleId,'id': id,'name': name});
   }
 
   void getTableHead(Map<String, dynamic> info) {
@@ -136,8 +144,7 @@ class ModulerecordLogic extends BaseListController {
 
       fieldHeads = value.data ?? [];
 
-      print("head1"+value.data.toString());
-      print("head2"+fieldHeads.toString());
+      print("表头返回值："+fieldHeads.toString());
 
     }).catchError((onError) {
       /// 结束loading

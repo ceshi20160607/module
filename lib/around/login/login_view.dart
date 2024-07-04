@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'login_logic.dart';
@@ -45,9 +45,13 @@ class LoginPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('没有账号?'),
+            Text(
+              '没有账号?',
+              style: TextStyle(fontSize: 14.sp),
+            ),
             GestureDetector(
-              child: const Text('点击注册', style: TextStyle(color: Colors.green)),
+              child: Text('点击注册',
+                  style: TextStyle(color: Colors.green, fontSize: 14.sp)),
               onTap: () {
                 print("点击注册");
               },
@@ -82,10 +86,10 @@ class LoginPage extends StatelessWidget {
   //   );
 
   Widget buildOtherLoginText() {
-    return const Center(
+    return Center(
       child: Text(
         '其他账号登录',
-        style: TextStyle(color: Colors.grey, fontSize: 14),
+        style: TextStyle(color: Colors.grey, fontSize: 14.sp),
       ),
     );
   }
@@ -101,7 +105,7 @@ class LoginPage extends StatelessWidget {
               // 设置圆角
               shape: MaterialStateProperty.all(const StadiumBorder(
                   side: BorderSide(style: BorderStyle.none)))),
-          child: Text('登录', style: TextStyle(fontSize: 30.0)),
+          child: Text('登录', style: TextStyle(fontSize: 30.sp)),
           onPressed: () => logic.on_login(),
         ),
       ),
@@ -115,8 +119,8 @@ class LoginPage extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: TextButton(
           onPressed: () => logic.on_password(),
-          child: const Text("忘记密码？",
-              style: TextStyle(fontSize: 14, color: Colors.grey)),
+          child: Text("忘记密码？",
+              style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
         ),
       ),
     );
@@ -124,12 +128,14 @@ class LoginPage extends StatelessWidget {
 
   Widget buildPasswordTextField() {
     return TextFormField(
+        style: TextStyle(fontSize: 14.sp),
         onChanged: (v) => state.password = v!,
         // onSaved: (v) => state.loginEntity.password = v!,
         // validator: (v) => logic.on_password_check(v),
         obscureText: state.isObscure,
         decoration: InputDecoration(
           labelText: "密码",
+          labelStyle: TextStyle(fontSize: 14.sp),
           suffixIcon: IconButton(
             icon: Icon(
               Icons.remove_red_eye,
@@ -142,7 +148,9 @@ class LoginPage extends StatelessWidget {
 
   Widget buildEmailTextField() {
     return TextFormField(
-      decoration: InputDecoration(labelText: '用户名/邮箱'),
+      style: TextStyle(fontSize: 14.sp),
+      decoration: InputDecoration(
+          labelText: '用户名/邮箱', labelStyle: TextStyle(fontSize: 14.sp)),
       // validator: (v) => logic.on_username_check(v),
       // onSaved: (v) => state.loginEntity.username = v!,
       // onSaved: (v) => logic.on_username_check(v),
@@ -164,12 +172,11 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget buildTitle() {
-
-    return const Padding(
+    return Padding(
         padding: EdgeInsets.all(8),
         child: Text(
           '登录',
-          style: TextStyle(fontSize: 42),
+          style: TextStyle(fontSize: 42.sp),
         ));
   }
 }

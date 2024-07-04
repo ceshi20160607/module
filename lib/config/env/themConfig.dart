@@ -31,13 +31,13 @@ ThemeData lightTheme = ThemeData.light().copyWith(
                 color:
                     Colors.black))), // UnderlineInputBorder, InputDecorationT
     /// 导航栏样式配置
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white70,
         centerTitle: true,
         elevation: 1.0,
         titleTextStyle: TextStyle(
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w600,
             color: Colors.black)), // TextStyle, AppBarTheme
     textButtonTheme: const TextButtonThemeData());
@@ -73,13 +73,13 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
                 color:
                     Colors.black))), // UnderlineInputBorder, InputDecorationT
     /// 导航栏样式配置
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.black54,
         centerTitle: true,
         elevation: 1.0,
         titleTextStyle: TextStyle(
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w600,
             color: Colors.white)), // TextStyle, AppBarTheme
     textButtonTheme: const TextButtonThemeData());

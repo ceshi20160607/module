@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:module/config/enum/module_type.dart';
 
 import '../../config/base/base_list_view.dart';
+import '../../config/widget/loading_widget.dart';
 import 'modulerecord_logic.dart';
 
 class ModulerecordPage extends BaseListView<ModulerecordLogic> {
@@ -16,11 +19,39 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
 
   /// 设置左边按钮宽度
   @override
+  double? get leftWidth => 50;
+
+  /// 设置左边按钮宽度
+  @override
   bool? get isTitleCenter => true;
 
   /// 设置左边按钮宽度
   @override
-  bool? get isHiddenLeftNav => true;
+  bool? get isHiddenLeftNav => false;
+
+  /// 设置右边按钮宽度
+  @override
+  bool? get isHiddenRightNav => false;
+
+  ///  设置右边按钮
+  @override
+  List<Widget>? get rightActionList => [
+    GestureDetector(
+      onTap: () {
+        //跳转新增
+        controller.jumpRecord(null, controller.requestParams['moduleName']);
+      },
+      child: Icon(
+        Icons.add,
+        color: Colors.black,
+        size: 20.0,
+      ),
+    ),
+    SizedBox(
+      width: 20.0,
+    )
+  ];
+
 
   @override
   Widget buildContent() {
@@ -75,13 +106,14 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
       horizontalMargin: 20,
       columnSpacing: 50,
       dividerThickness: 2,
+
     );
   }
   _myDataColumn(String title) {
     return DataColumn(
       label: Text(
         title,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
       ),
       tooltip: '${title}',
       numeric: false,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../config/const/key_const.dart';
 import '../../config/util/CommonUtil.dart';
@@ -26,8 +27,8 @@ class NavbarPage extends GetView<NavbarLogic> {
     return BottomNavigationBar(
       unselectedItemColor: Colors.grey,
       selectedItemColor: Colors.black,
-      selectedFontSize: 12.0,
-      unselectedFontSize: 12.0,
+      selectedFontSize: 12.sp,
+      unselectedFontSize: 12.sp,
       items: [
         CommonUtil.buildBottomNavigationBarItem(KSConst.module, "module"),
         CommonUtil.buildBottomNavigationBarItem(KSConst.examine, "examine"),

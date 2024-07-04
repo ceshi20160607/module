@@ -10,21 +10,22 @@ import '../../models/index.dart';
 
 class ModulefieldLogic extends BaseCommonController {
   List<Modulefield> fieldList = [];
-  bool inputFlag = true;
-  int moduleId = 7;
-  String title = '';
+  bool addFlag = true;
+  // int moduleId = 7;
+  String title = '新建';
 
   @override
   void initData() {
     // TODO: implement initData
-    String id = Get.arguments['id'];
+    String moduleId = Get.arguments['moduleId'];
+    if(Get.arguments['id']!=null){
+      addFlag = false;
+      title = '编辑'+ Get.arguments['moduleName'];
+    }
 
-    inputFlag = id.isEmpty?true:false;
-    title = id.isEmpty?'新建':'编辑';
-
-    logD("id--->$id");
+    logD("id--->$moduleId");
     logD("title--->$title");
-    Http().client.moduleFieldQueryFieldAdd(1,moduleId).then((value) {
+    Http().client.moduleFieldQueryFieldAdd(1,int.parse(moduleId)).then((value) {
       Loading.dissmiss();
       netState = NetState.dataSussessState;
       fieldList = value.data!;
@@ -53,12 +54,12 @@ class ModulefieldLogic extends BaseCommonController {
       entity[f.fieldName] = f.value;
     }
     Map<String,dynamic> info = {};
-    info["moduleId"] = moduleId;
+    info["moduleId"] = Get.arguments['moduleId'];
     info["entity"] = entity;
     Http().client.moduleRecordAdd(info).then((value) {
       Loading.dissmiss();
       netState = NetState.dataSussessState;
-      inputFlag = true;
+      // addFlag = true;
 
       logD("info--->$netState");
       logD("info--->$fieldList");
@@ -72,6 +73,6 @@ class ModulefieldLogic extends BaseCommonController {
     });
 
     /// 保存，后关闭返回列表
-    Get.toNamed(ModuleTypeEnum.MODULERECORD.routepath);
+    Get.back();
   }
 }

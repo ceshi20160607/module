@@ -20,11 +20,15 @@ class ModulefieldPage extends BaseCommonView<ModulefieldLogic> {
 
   /// 设置左边按钮宽度
   @override
-  bool? get isTitleCenter => false;
+  bool? get isTitleCenter => true;
 
   /// 设置左边按钮宽度
   @override
   bool? get isHiddenLeftNav => false;
+
+  /// 设置右边按钮宽度
+  @override
+  bool? get isHiddenRightNav => false;
 
   ///  设置右边按钮
   @override
@@ -47,12 +51,12 @@ class ModulefieldPage extends BaseCommonView<ModulefieldLogic> {
 
   @override
   Widget buildContent() {
-    throw GetBuilder<ModulefieldLogic>(
+    return GetBuilder<ModulefieldLogic>(
         builder: (_) => creatCommonView(
           controller,
           BaseAddWidget(
             fieldList: controller.fieldList,
-            inputFlag: false,
+            inputFlag: controller.addFlag,
           ),
           // Stack(
           //   children: ,

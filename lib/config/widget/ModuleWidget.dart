@@ -60,9 +60,9 @@ class ModuleWidget extends StatelessWidget {
           color: Colors.blue,
           //该属性和Text的textScaleFactor都用于控制字体大小
           //fontSize可以精确指定字体大小，而textScaleFactor只能通过缩放比例来控制。
-          fontSize: 18.0,
+          fontSize: 18.sp,
           //该属性用于指定行高，但它并不是一个绝对值，而是一个因子，具体的行高等于fontSize*height
-          height: 1.2,
+          height: 1.2.sp,
           fontFamily: "Courier",
           background: new Paint()..color = Colors.yellow,
           //线的颜色
