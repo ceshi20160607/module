@@ -57,13 +57,77 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
   Widget buildContent() {
     // TODO: implement buildContent
     return GetBuilder<ModulerecordLogic>(builder: (_) {
+      // return creatRefresherListView(
+      //     controller,
+      //     _myDataTable(),
+      // );
       return creatRefresherListView(
           controller,
-          _myDataTable(),
-      );
+          ListView.builder(
+              padding: const EdgeInsets.all(0),
+              itemCount: controller.recordList.length,
+              itemBuilder: (context, index) {
+                return makeCard(controller.recordList[index]);
+              }));
     });
   }
 
+
+  Widget makeCard(Map<String,dynamic> record){
+    return Card(
+      elevation: 8.0,
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      child: Container(
+        decoration: BoxDecoration(color: Color.fromRGBO(
+            219, 227, 243, 0.9019607843137255)),
+        child: makeCardItem(record),
+      ),
+    );
+  }
+  Widget makeCardItem(Map<String,dynamic> record){
+    return ListTile(
+      contentPadding:
+      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      leading: Container(
+        padding: EdgeInsets.only(right: 12.0),
+        decoration: BoxDecoration(
+            border: Border(
+                right: BorderSide(width: 1.0, color: Colors.white24))),
+        child: Icon(Icons.autorenew, color: Colors.white),
+      ),
+      title: Text(
+        record['name'],
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+      subtitle: Row(
+        children: <Widget>[
+          Expanded(
+              flex: 1,
+              child: Container(
+                // tag: 'hero',
+                child: LinearProgressIndicator(
+                    backgroundColor: Color.fromRGBO(15, 216, 216, 0.2),
+                    value: 1,
+                    valueColor: AlwaysStoppedAnimation(Colors.green)),
+              )),
+          Expanded(
+            flex: 4,
+            child: Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Text("2",
+                    style: TextStyle(color: Colors.white))),
+          )
+        ],
+      ),
+      trailing:
+      Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+      onTap: () {
+        controller.jumpRecord(record['id'],record['name']);
+      },
+    );
+  }
+
+  //--------------------------------------------------------
   //展示表格出现表格表头空的问题
   _myDataTable(){
     return DataTable(
@@ -127,6 +191,7 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
       Text(s),
     );
   }
+
   _myDataCellJumpInfo(String id,String name) {
     return DataCell(
       Text(name),
@@ -135,6 +200,8 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
       },
     );
   }
+
+//--------------------------------------------------------
 
 }
 
