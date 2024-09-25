@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -68,138 +70,187 @@ class ModulerecordPage extends BaseListView<ModulerecordLogic> {
               itemCount: controller.recordList.length,
               itemBuilder: (context, index) {
                 return makeCard(controller.recordList[index]);
-              }));
+              }),enablePullUp:true,enablePullDown: true);
     });
   }
 
 
   Widget makeCard(Map<String,dynamic> record){
     return Card(
-      elevation: 8.0,
-      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      // elevation: 8.0,
+      // margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       child: Container(
-        decoration: BoxDecoration(color: Color.fromRGBO(
-            219, 227, 243, 0.9019607843137255)),
+        decoration: _backgroundCard(record["record_flag"]),
         child: makeCardItem(record),
       ),
     );
   }
+  _backgroundCard(int recordFlag){
+    if(recordFlag==1){
+      return BoxDecoration(color: Color.fromRGBO(
+          103, 50, 3, 0.8156862745098039));
+    }else if(recordFlag ==2){
+      return BoxDecoration(color: Color.fromRGBO(
+          250, 58, 58, 0.9019607843137255));
+    }else{
+      return BoxDecoration(color: Color.fromRGBO(
+          219, 227, 243, 0.9019607843137255));
+    }
+  }
   Widget makeCardItem(Map<String,dynamic> record){
+
     return ListTile(
-      contentPadding:
-      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      leading: Container(
-        padding: EdgeInsets.only(right: 12.0),
-        decoration: BoxDecoration(
-            border: Border(
-                right: BorderSide(width: 1.0, color: Colors.white24))),
-        child: Icon(Icons.autorenew, color: Colors.white),
-      ),
-      title: Text(
-        record['name'],
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-      subtitle: Row(
-        children: <Widget>[
-          Expanded(
-              flex: 1,
-              child: Container(
-                // tag: 'hero',
-                child: LinearProgressIndicator(
-                    backgroundColor: Color.fromRGBO(15, 216, 216, 0.2),
-                    value: 1,
-                    valueColor: AlwaysStoppedAnimation(Colors.green)),
-              )),
-          Expanded(
-            flex: 4,
-            child: Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: Text("2",
-                    style: TextStyle(color: Colors.white))),
-          )
-        ],
-      ),
+      // contentPadding:
+      //   EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      leading: _leftSubWidget(record["record_flag"]),
+      // title: Text(
+      //   record['name']??'',
+      //   style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold),
+      // ),
+      subtitle: _myCardDataRow(record),
+      // minLeadingWidth: 0,
       trailing:
       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
       onTap: () {
-        controller.jumpRecord(record['id'],record['name']);
+        controller.jumpRecord(record['id'],record['name']??'详情');
       },
     );
   }
-
-  //--------------------------------------------------------
-  //展示表格出现表格表头空的问题
-  _myDataTable(){
-    return DataTable(
-      columns: _myDataColumnList(),
-      rows: _myDataRow(),
-      dataRowHeight: 40,
-      headingRowHeight: 55,
-      horizontalMargin: 20,
-      columnSpacing: 50,
-      dividerThickness: 2,
-
+  _leftSubWidget(int recordFlag){
+    return Container(
+      padding: EdgeInsets.only(right: 12.0),
+      decoration: BoxDecoration(
+          border: Border(
+              right: BorderSide(width: 1.0, color: Colors.white24))),
+      child: _leftBorderWidget(recordFlag),
     );
   }
-  _myDataColumn(String title) {
-    return DataColumn(
-      label: Text(
-        title,
-        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-      ),
-      tooltip: '${title}',
-      numeric: false,
+  _leftBorderWidget(int recordFlag){
+    return Column(
+      children: [
+        Text("2024"),
+        Text("07/13"),
+        _leftIconCard(recordFlag),
+      ],
     );
   }
-  _myDataColumnList() {
-    List<DataColumn> _dataColumnList = [];
-    if (controller.fieldHeads.length > 0) {
-      _dataColumnList.clear();
+  _leftIconCard(int recordFlag){
+    if(recordFlag==1){
+      return Icon(Icons.car_crash, color: Colors.white,size: 16,);
+    }else if(recordFlag ==2){
+      return Icon(Icons.oil_barrel_outlined, color: Colors.white,size: 16,);
+    }else{
+      return Icon(Icons.paypal, color: Colors.white,size: 16,);
     }
-    controller.fieldHeads.forEach((element) {
-      _dataColumnList.add(_myDataColumn(element.name));
-    });
-    return _dataColumnList;
   }
-  _myDataRow() {
-    List<DataRow> rows = [];
-    controller.recordList.forEach((r) {
-      List<DataCell> items = [];
+  _myCardDataRow(Map<String,dynamic> r) {
+    List<Row> rows = [];
       controller.fieldHeads.forEach((head) {
-        String id = r['id'];
-        String name = r['name']??'';
-        print('id:'+ id);
-        print('name:'+ name);
-        print('name:'+ head.fieldName);
-        dynamic aa = null;
-        String aaaa = "";
-        aaaa.toString();
+        print('value:'+ head.name);
+        String temptitle = head.name ;
         String value = r[head.fieldName]!=null?r[head.fieldName].toString():'';
         print('value:'+ value);
-        if (head.fieldName == 'name') {
-          items.add(_myDataCellJumpInfo(id,name));
-        } else {
-          items.add(_myDataCell(value));
+        if(head.type==8){
+          if(value.isNotEmpty){
+            Map<String,dynamic> optiondata = jsonDecode(head.optionData??'{}');
+            value = optiondata[r[head.fieldName].toString()];
+          }
         }
+        rows.add(Row(children: [
+          Expanded(
+            flex: 1,
+            child: Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Text(temptitle + ' : ',
+                    style: TextStyle(color: Colors.black))),
+          ),Expanded(
+            flex: 1,
+            child: Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Text(value,
+                    style: TextStyle(color: Colors.black))),
+          ),
+        ],
+        ),
+        );
       });
-      rows.add(DataRow(cells: items));
-    });
-    return rows;
-  }
-  _myDataCell(String s) {
-    return DataCell(
-      Text(s),
-    );
+    return Column(children: rows,);
   }
 
-  _myDataCellJumpInfo(String id,String name) {
-    return DataCell(
-      Text(name),
-      onTap: () {
-        controller.jumpRecord(id, name);
-      },
-    );
-  }
+
+  //--------------------------------------------------------
+  // //展示表格出现表格表头空的问题
+  // _myDataTable(){
+  //   return DataTable(
+  //     columns: _myDataColumnList(),
+  //     rows: _myDataRow(),
+  //     dataRowHeight: 40,
+  //     headingRowHeight: 55,
+  //     horizontalMargin: 20,
+  //     columnSpacing: 50,
+  //     dividerThickness: 2,
+  //
+  //   );
+  // }
+  // _myDataColumn(String title) {
+  //   return DataColumn(
+  //     label: Text(
+  //       title,
+  //       style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+  //     ),
+  //     tooltip: '${title}',
+  //     numeric: false,
+  //   );
+  // }
+  // _myDataColumnList() {
+  //   List<DataColumn> _dataColumnList = [];
+  //   if (controller.fieldHeads.length > 0) {
+  //     _dataColumnList.clear();
+  //   }
+  //   controller.fieldHeads.forEach((element) {
+  //     _dataColumnList.add(_myDataColumn(element.name));
+  //   });
+  //   return _dataColumnList;
+  // }
+  // _myDataRow() {
+  //   List<DataRow> rows = [];
+  //   controller.recordList.forEach((r) {
+  //     List<DataCell> items = [];
+  //     controller.fieldHeads.forEach((head) {
+  //       String id = r['id'];
+  //       String name = r['name']??'';
+  //       print('id:'+ id);
+  //       print('name:'+ name);
+  //       print('name:'+ head.fieldName);
+  //       dynamic aa = null;
+  //       String aaaa = "";
+  //       aaaa.toString();
+  //       String value = r[head.fieldName]!=null?r[head.fieldName].toString():'';
+  //       print('value:'+ value);
+  //       if (head.fieldName == 'name') {
+  //         items.add(_myDataCellJumpInfo(id,name));
+  //       } else {
+  //         items.add(_myDataCell(value));
+  //       }
+  //     });
+  //     rows.add(DataRow(cells: items));
+  //   });
+  //   return rows;
+  // }
+  // _myDataCell(String s) {
+  //   return DataCell(
+  //     Text(s),
+  //   );
+  // }
+  //
+  // _myDataCellJumpInfo(String id,String name) {
+  //   return DataCell(
+  //     Text(name),
+  //     onTap: () {
+  //       controller.jumpRecord(id, name);
+  //     },
+  //   );
+  // }
 
 //--------------------------------------------------------
 
