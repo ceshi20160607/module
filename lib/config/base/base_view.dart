@@ -50,6 +50,7 @@ abstract class BaseView<T> extends GetView<T> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: contentColor ?? Colors.white,
         appBar: isHiddenNav == true
             ? null

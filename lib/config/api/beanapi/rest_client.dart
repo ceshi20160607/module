@@ -12,15 +12,19 @@ abstract class RestClient {
 
   ///-----------------------------user-------------------------
   /// 列表接口
-  @POST("user/doLogin")
+  @POST("moduleAdmin/doLogin")
+  // @POST("user/doLogin")
   Future<Result<User>> doLogin(@Body() Map<String, dynamic> param);
 
   // ///------------------------------examine------------------------
   @POST("examine/queryPageList")
   Future<Result<Modulefieldpage>> examineQueryPageList(@Body() Map<String, dynamic> param);
   // ///------------------------------module------------------------
-  @POST("module/queryPageList")
-  Future<Result<Modulepage>> moduleQueryPageLis(@Body() Map<String, dynamic> param);
+  // @POST("module/queryPageList")
+  @POST("module/queryPageListBean")
+  Future<Result<Modulepage>> moduleQueryPageList(@Body() Map<String, dynamic> param);
+  @POST("module/queryPageListTree")
+  Future<Result<List<Module>>> moduleQueryPageListTree(@Body() Map<String, dynamic> param);
 
   // ///------------------------------module-field------------------------
   @POST("moduleField/queryFieldAdd")

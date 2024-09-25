@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:module/config/util/log_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../widget/empty_status.dart';
@@ -39,6 +40,9 @@ abstract class BaseListView<T> extends BaseView<T> {
     bool? enablePullUp,
     bool? enablePullDown,
   }) {
+    logD("msg---->$enablePullUp");
+    bool item = enablePullUp ?? true;
+    logD("msg---->$enablePullDown");
     if (controller.netState == NetState.loadingState) {
       /// loading 不会有这个状态,只是写一个这样的判断吧(控制器里面已经封装好了单例了,防止在网络层直接操作控制不了loading的场景)
       return const LoadingWidget();
@@ -60,11 +64,12 @@ abstract class BaseListView<T> extends BaseView<T> {
 
           /// 刷新回调方法
           onRefresh: () async {
+            logD("shuaxin");
             controller.refreshData();
           },
-
           /// 加载下一页回调
           onLoading: () async {
+            logD("next");
             controller.loadMore();
           },
           header: createCustomHeader(),

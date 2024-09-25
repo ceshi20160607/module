@@ -3,6 +3,7 @@ enum ModuleTypeEnum {
   LOGIN(0, 0, "/login"),
 
   NAVBAR(0, 0, "/navbar"),
+  DRAWER(0, 0, "/drawer"),
   // INDEX(0, 0, "/index"),
   // HOME(0, 0, "/home"),
 

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:module/around/drawer/drawer_binding.dart';
+import 'package:module/around/drawer/drawer_view.dart';
 
 import '../../around/login/login_binding.dart';
 import '../../around/login/login_view.dart';
@@ -25,6 +27,11 @@ class AppRoutes {
         name: ModuleTypeEnum.NAVBAR.routepath,
         page: () => NavbarPage(),
         binding: NavbarBinding()),
+    GetPage(
+        name: ModuleTypeEnum.DRAWER.routepath,
+        page: () => DrawerPage(),
+        binding: DrawerBinding()),
+
 
     GetPage(
         name: ModuleTypeEnum.MODULE.routepath,

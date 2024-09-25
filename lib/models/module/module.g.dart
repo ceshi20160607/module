@@ -7,32 +7,36 @@ part of 'module.dart';
 // **************************************************************************
 
 Module _$ModuleFromJson(Map<String, dynamic> json) => Module()
-  ..create_user_id = json['create_user_id'] as String
-  ..create_time = json['create_time'] as String
-  ..company_id = json['company_id'] as String
-  ..hidden_flag = json['hidden_flag'] as num
-  ..update_time = json['update_time'] as String?
-  ..update_user_id = json['update_user_id'] as String?
-  ..parent_id = json['parent_id'] as String
-  ..sort_num = json['sort_num'] as num
+  ..createUserId = json['createUserId'] as String
+  ..createTime = json['createTime'] as String
+  ..companyId = json['companyId'] as String
+  ..hiddenFlag = json['hiddenFlag'] as num
+  ..updateTime = json['updateTime'] as String?
+  ..updateUserId = json['updateUserId'] as String?
+  ..parentId = json['parentId'] as String
+  ..sortNum = json['sortNum'] as num
   ..name = json['name'] as String
-  ..depth_depth = json['depth_depth'] as String
-  ..root_id = json['root_id'] as String
+  ..depthDepth = json['depthDepth'] as String
+  ..rootId = json['rootId'] as String
   ..id = json['id'] as String?
-  ..type_flag = json['type_flag'] as num;
+  ..typeFlag = json['typeFlag'] as num
+  ..children = (json['children'] as List<dynamic>)
+      .map((e) => Module.fromJson(e as Map<String, dynamic>))
+      .toList();
 
 Map<String, dynamic> _$ModuleToJson(Module instance) => <String, dynamic>{
-      'create_user_id': instance.create_user_id,
-      'create_time': instance.create_time,
-      'company_id': instance.company_id,
-      'hidden_flag': instance.hidden_flag,
-      'update_time': instance.update_time,
-      'update_user_id': instance.update_user_id,
-      'parent_id': instance.parent_id,
-      'sort_num': instance.sort_num,
+      'createUserId': instance.createUserId,
+      'createTime': instance.createTime,
+      'companyId': instance.companyId,
+      'hiddenFlag': instance.hiddenFlag,
+      'updateTime': instance.updateTime,
+      'updateUserId': instance.updateUserId,
+      'parentId': instance.parentId,
+      'sortNum': instance.sortNum,
       'name': instance.name,
-      'depth_depth': instance.depth_depth,
-      'root_id': instance.root_id,
+      'depthDepth': instance.depthDepth,
+      'rootId': instance.rootId,
       'id': instance.id,
-      'type_flag': instance.type_flag,
+      'typeFlag': instance.typeFlag,
+      'children': instance.children,
     };

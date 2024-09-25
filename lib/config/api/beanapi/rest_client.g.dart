@@ -33,7 +33,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              'user/doLogin',
+              'moduleAdmin/doLogin',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -82,7 +82,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<Result<Modulepage>> moduleQueryPageLis(
+  Future<Result<Modulepage>> moduleQueryPageList(
       Map<String, dynamic> param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -97,7 +97,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              'module/queryPageList',
+              'module/queryPageListBean',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -109,6 +109,42 @@ class _RestClient implements RestClient {
     final value = Result<Modulepage>.fromJson(
       _result.data!,
       (json) => Modulepage.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<Result<List<Module>>> moduleQueryPageListTree(
+      Map<String, dynamic> param) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(param);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Result<List<Module>>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'module/queryPageListTree',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Result<List<Module>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<Module>((i) => Module.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }
@@ -349,7 +385,7 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     final value = Result<Map<String, dynamic>>.fromMapJson(
-      _result.data!,
+      _result.data!
     );
     return value;
   }

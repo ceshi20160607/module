@@ -65,9 +65,9 @@ class _EmptyStatusWidgetState extends State<EmptyStatusWidget> {
   /// 获取图片名称
   Widget _getImageWidget() {
     if (widget.emptyType == EmptyStatusType.fail) {
-      return Image.asset('images/icon_image_fail.png');
+      return Image.asset('assets/images/icon_image_fail.png');
     } else {
-      return Image.asset('images/image_empty.webp');
+      return Image.asset('assets/images/image_empty.webp');
     }
   }
 

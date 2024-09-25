@@ -6,19 +6,20 @@ part 'module.g.dart';
 class Module {
   Module();
 
-  late String create_user_id;
-  late String create_time;
-  late String company_id;
-  late num hidden_flag;
-  String? update_time;
-  String? update_user_id;
-  late String parent_id;
-  late num sort_num;
+  late String createUserId;
+  late String createTime;
+  late String companyId;
+  late num hiddenFlag;
+  String? updateTime;
+  String? updateUserId;
+  late String parentId;
+  late num sortNum;
   late String name;
-  late String depth_depth;
-  late String root_id;
+  late String depthDepth;
+  late String rootId;
   String? id;
-  late num type_flag;
+  late num typeFlag;
+  late List<Module> children;
   
   factory Module.fromJson(Map<String,dynamic> json) => _$ModuleFromJson(json);
   Map<String, dynamic> toJson() => _$ModuleToJson(this);

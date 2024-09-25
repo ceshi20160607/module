@@ -30,10 +30,11 @@ class ModuleLogic extends BaseListController {
 
     Http()
         .client
-        .moduleQueryPageLis(info)
+        .moduleQueryPageList(info)
         .then((value) {
       netState = NetState.dataSussessState;
 
+      logD("moduleList1:");
       /// 结束loading
       Loading.dissmiss();
       List<Module> list = value.data?.list ?? [];
@@ -58,7 +59,8 @@ class ModuleLogic extends BaseListController {
       if (list.length < 20) {
         refreshController.loadNoData();
       }
-
+      logD("moduleList:");
+      logD(moduleList);
       update();
     }).catchError((onError) {
       /// 结束loading

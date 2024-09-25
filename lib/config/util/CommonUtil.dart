@@ -9,7 +9,7 @@ class CommonUtil {
       icon: Container(
         margin: EdgeInsets.only(bottom: 8),
         child: Image.asset(
-          "images/icon/${iconName}_custom.png",
+          "assets/icon/${iconName}_custom.png",
           width: 18,
           height: 18,
           gaplessPlayback:
@@ -21,7 +21,7 @@ class CommonUtil {
       activeIcon: Container(
         margin: EdgeInsets.only(bottom: 8),
         child: Image.asset(
-          "images/icon/${iconName}_custom.png",
+          "assets/icon/${iconName}_custom.png",
           width: 18,
           height: 18,
           gaplessPlayback: true,
