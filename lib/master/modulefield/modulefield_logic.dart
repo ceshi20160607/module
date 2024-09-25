@@ -18,46 +18,28 @@ class ModulefieldLogic extends BaseCommonController {
   void initData() {
     // TODO: implement initData
     String moduleId = Get.arguments['moduleId'];
-    logD("moduleId--->$moduleId");
-
     if(Get.arguments['id']!=null){
       addFlag = false;
       title = '编辑'+ Get.arguments['moduleName'];
-      Http().client.moduleRecordInformation(int.parse(Get.arguments['id'])).then((value) {
-        Loading.dissmiss();
-        netState = NetState.dataSussessState;
-        fieldList = value.data!;
-
-        logD("info--->$netState");
-        logD("info--->$fieldList");
-        update();
-      }).catchError((onError) {
-        /// 结束loading
-        Loading.dissmiss();
-        print(onError);
-        netState = NetState.errorshowRelesh;
-        update();
-      });
-    }else{
-      title = '新建'+ Get.arguments['moduleName'];
-      Http().client.moduleFieldQueryFieldAdd(1,int.parse(moduleId)).then((value) {
-        Loading.dissmiss();
-        netState = NetState.dataSussessState;
-        fieldList = value.data!;
-
-        logD("info--->$netState");
-        logD("info--->$fieldList");
-        update();
-      }).catchError((onError) {
-        /// 结束loading
-        Loading.dissmiss();
-        print(onError);
-        netState = NetState.errorshowRelesh;
-        update();
-      });
     }
 
+    logD("id--->$moduleId");
+    logD("title--->$title");
+    Http().client.moduleFieldQueryFieldAdd(1,int.parse(moduleId)).then((value) {
+      Loading.dissmiss();
+      netState = NetState.dataSussessState;
+      fieldList = value.data!;
 
+      logD("info--->$netState");
+      logD("info--->$fieldList");
+      update();
+    }).catchError((onError) {
+      /// 结束loading
+      Loading.dissmiss();
+      print(onError);
+      netState = NetState.errorshowRelesh;
+      update();
+    });
   }
 
   @override
@@ -75,36 +57,6 @@ class ModulefieldLogic extends BaseCommonController {
     info["moduleId"] = Get.arguments['moduleId'];
     info["entity"] = entity;
     Http().client.moduleRecordAdd(info).then((value) {
-      Loading.dissmiss();
-      netState = NetState.dataSussessState;
-      // addFlag = true;
-
-      logD("info--->$netState");
-      logD("info--->$fieldList");
-      update();
-    }).catchError((onError) {
-      /// 结束loading
-      Loading.dissmiss();
-      print(onError);
-      netState = NetState.errorshowRelesh;
-      update();
-    });
-
-    /// 保存，后关闭返回列表
-    Get.back();
-  }
-
-  /// 保存
-  void edit() {
-    Map<String,dynamic> entity = {};
-    //处理字段
-    for(var f in fieldList){
-      entity[f.fieldName] = f.value;
-    }
-    Map<String,dynamic> info = {};
-    info["moduleId"] = Get.arguments['moduleId'];
-    info["entity"] = entity;
-    Http().client.moduleRecordUpdate(info).then((value) {
       Loading.dissmiss();
       netState = NetState.dataSussessState;
       // addFlag = true;

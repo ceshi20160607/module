@@ -36,13 +36,13 @@ class ModulefieldPage extends BaseCommonView<ModulefieldLogic> {
     GestureDetector(
       onTap: () {
         //执行保存方法
-        if(controller.addFlag){
-          controller.save();
-        }else{
-          controller.edit();
-        }
+        controller.save();
       },
-      child: iconWidget(),
+      child: Icon(
+        Icons.add,
+        color: Colors.white70,
+        size: 20.w,
+      ),
     ),
     SizedBox(
       width: 20.w,
@@ -58,23 +58,47 @@ class ModulefieldPage extends BaseCommonView<ModulefieldLogic> {
             fieldList: controller.fieldList,
             inputFlag: controller.addFlag,
           ),
+          // Stack(
+          //   children: ,
+          //   // children: [
+          //   //   SizedBox(
+          //   //     child: Column(
+          //   //       children: [
+          //   //         Text(
+          //   //           controller.car.carType == 0 ? "日程" : "加油",
+          //   //         )
+          //   //       ],
+          //   //     ),
+          //   //   ),
+          //   //   Text(controller.car.id),
+          //   //   Text(
+          //   //     controller.car.createTime,
+          //   //     style: TextStyle(backgroundColor: Colors.orange),
+          //   //   ),
+          //   //   // Padding(
+          //   //   //   padding: EdgeInsets.only(
+          //   //   //       top: ScreenUtil().statusBarHeight + kToolbarHeight,
+          //   //   //       bottom: ScreenUtil().bottomBarHeight + 60.h),
+          //   //   //   child: Text(
+          //   //   //     controller.car!.id,
+          //   //   //   ),
+          //   //   // )
+          //   //
+          //   //   // Padding(
+          //   //   //   padding: EdgeInsets.only(
+          //   //   //       top: ScreenUtil().statusBarHeight + kToolbarHeight,
+          //   //   //       bottom: ScreenUtil().bottomBarHeight + 60.h),
+          //   //   //   child: Text(
+          //   //   //     controller.car.createTime,
+          //   //   //     style: TextStyle(
+          //   //   //         fontSize: 16,
+          //   //   //         fontWeight: FontWeight.bold,
+          //   //   //         color: Colors.red),
+          //   //   //   ),
+          //   //   // ),
+          //   // ],
+          // )
         ));
-  }
-
-  Widget iconWidget() {
-    if(controller.addFlag){
-      return Icon(
-        Icons.add,
-        color: Colors.lightGreenAccent,
-        size: 20.w,
-      );
-    }else{
-      return Icon(
-        Icons.save,
-        color: Colors.blueAccent,
-        size: 20.w,
-      );
-    }
   }
 
 
