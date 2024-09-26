@@ -3,80 +3,49 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../config/base/base_common_view.dart';
+import '../../config/base/base_list_view.dart';
 import '../../models/module/module.dart';
 import 'drawer_logic.dart';
 
-class DrawerPage extends BaseCommonView<DrawerLogic> {
+class DrawerPage extends BaseListView<DrawerLogic> {
   DrawerPage({Key? key}) : super(key: key);
+  final controller = Get.find<DrawerLogic>();
+  /// 设置导航栏文字
+  @override
+  String? get navTitle => '模块';
 
+  /// 设置左边按钮宽度
+  @override
+  bool? get isTitleCenter => true;
+
+  /// 设置左边按钮宽度
+  @override
+  bool? get isHiddenLeftNav => true;
 
   @override
   Widget buildContent() {
     // TODO: implement buildContent
     throw UnimplementedError();
   }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        drawer: leftDrawer(),
-        appBar: AppBar(
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.directions_car)),
-              Tab(icon: Icon(Icons.directions_transit)),
-              Tab(icon: Icon(Icons.directions_bike)),
-              // Tab(icon: Icon(Icons.fourteen_mp)),
-              // Tab(icon: Icon(Icons.fourteen_mp_sharp)),
-              // Tab(icon: Icon(Icons.fourteen_mp_rounded)),
-              // Tab(icon: Icon(Icons.one_k_sharp)),
-              // Tab(icon: Icon(Icons.one_k_rounded)),
-              // Tab(icon: Icon(Icons.one_k_outlined)),
-              // Tab(icon: Icon(Icons.one_k_plus)),
-              // Tab(icon: Icon(Icons.one_k_plus_sharp)),
-            ],
-          ),
-          title: const Text('Tabs Demo'),
-        ),
-        body: const TabBarView(
-          children: [
-            Text("data"),
-            Text("111"),
-            Text("222"),
-            // Icon(Icons.directions_car),
-            // Icon(Icons.directions_transit),
-            // Icon(Icons.directions_bike),
-            // Icon(Icons.fourteen_mp),
-            // Icon(Icons.fourteen_mp_sharp),
-            // Icon(Icons.fourteen_mp_rounded),
-            // Icon(Icons.one_k_sharp),
-            // Icon(Icons.one_k_rounded),
-            // Icon(Icons.one_k_outlined),
-            // Icon(Icons.one_k_plus),
-            // Icon(Icons.one_k_plus_sharp),
-          ],
-        ),
-      ),
-    );
-    // return Scaffold(
-    //   drawer: leftDrawer(),
-    //   appBar: AppBar(
-    //     // bottom: TabBar(
-    //     //   tabs: [
-    //     //     Tab(icon: Icon(Icons.directions_car)),
-    //     //     Tab(icon: Icon(Icons.directions_bike)),
-    //     //   ],
-    //     // ),
-    //     title: Text('Tabs Demo'),
-    //   ),
-    //   // body: TabBarView(
-    //   //   children: [
-    //   //     Icon(Icons.directions_car),
-    //   //     Icon(Icons.directions_bike),
-    //   //   ],
-    //   // ),
-    // );
+    return GetBuilder<DrawerLogic>(builder: (_) {
+      // return creatRefresherListView(
+      //     controller,
+      //     _myDataTable(),
+      // );
+      return creatRefresherListView(
+          controller,
+          ListView.builder(
+              padding: const EdgeInsets.all(0),
+              itemCount: controller.recordList.length,
+              itemBuilder: (context, index) {
+                // return makeCard(controller.recordList[index]);
+              }),
+          enablePullUp: true,
+          enablePullDown: true);
+    });
   }
 
   Widget leftDrawer() {

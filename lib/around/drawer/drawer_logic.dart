@@ -1,14 +1,19 @@
 import 'package:get/get.dart';
 
-import '../../config/base/base_common_controller.dart';
+import '../../config/base/base_list_controller.dart';
 import '../../config/enum/module_type.dart';
 import '../../config/net/http.dart';
 import '../../config/util/log_util.dart';
 import '../../config/widget/loading_widget.dart';
 import '../../models/index.dart';
 
-class DrawerLogic extends BaseCommonController {
+class DrawerLogic extends BaseListController {
   List<Module> moduleList = [];
+
+  List<Modulefield> fieldHeads = [];
+  List<Map<String,dynamic>> recordList = [];
+  String title='';
+  Map<String, dynamic> requestParams = {};
 
   @override
   void initData() {

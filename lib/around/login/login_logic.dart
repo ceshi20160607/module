@@ -59,8 +59,8 @@ class LoginLogic extends GetxController {
           .setString(KSConst.saToken, user.tokenValue);
 
       //跳转页面
-      // Get.offAllNamed(ModuleTypeEnum.NAVBAR.routepath);
-      Get.offAllNamed(ModuleTypeEnum.DRAWER.routepath);
+      Get.offAllNamed(ModuleTypeEnum.NAVBAR.routepath);
+      // Get.offAllNamed(ModuleTypeEnum.DRAWER.routepath);
       //更新
       update();
     }).catchError((onError) {

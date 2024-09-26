@@ -96,7 +96,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/icon/
+    - assets/icons/
     - assets/images/
   fonts:
     - family: IconFont

@@ -63,8 +63,8 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.light,
               // routingCallback: (routing) {},
               initialRoute: SharedPreferencesUtil.getBool(KSConst.isLogin)
-                  // ? ModuleTypeEnum.NAVBAR.routepath
-                  ? ModuleTypeEnum.DRAWER.routepath
+                  ? ModuleTypeEnum.NAVBAR.routepath
+                  // ? ModuleTypeEnum.DRAWER.routepath
                   : ModuleTypeEnum.LOGIN.routepath,
             ));
   }
